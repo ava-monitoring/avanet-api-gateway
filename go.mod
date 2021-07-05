@@ -4,6 +4,8 @@ go 1.12
 
 require (
 	github.com/Azure/go-autorest/autorest v0.11.12 // indirect
+  github.com/avamonitoring/avanet-gateway-access-control v0.1.0-alpha.1
+	github.com/avamonitoring/avanet-gateway-access-logging v0.0.0-20201018160748-7257a66ff0ae
 	github.com/catalinc/hashcash v0.0.0-20161205220751-e6bc29ff4de9 // indirect
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/codegangsta/negroni v1.0.0 // indirect
@@ -76,3 +78,9 @@ require (
 )
 
 replace github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79 => github.com/m4ns0ur/httpcache v0.0.0-20200426190423-1040e2e8823f
+
+//replace github.com/luraproject/lura => /root/go/src/github.com/luraproject/lura
+
+//replace github.com/avamonitoring/avanet-gateway-access-control => /root/go/src/github.com/avamonitoring/avanet-gateway-access-control
+
+//replace github.com/avamonitoring/avanet-gateway-access-logging => /root/go/src/github.com/avamonitoring/avanet-gateway-access-logging
