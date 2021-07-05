@@ -2,8 +2,8 @@ package krakend
 
 import (
   "context"
-  "net/http"
-  "time"
+  //"net/http"
+  //"time"
   cb "github.com/devopsfaith/krakend-circuitbreaker/gobreaker/proxy"
   lua "github.com/devopsfaith/krakend-lua/proxy"
   "github.com/devopsfaith/krakend-martian"
@@ -35,7 +35,7 @@ func NewBackendFactoryWithContext(ctx context.Context, logger logging.Logger, me
     } else {
       clientFactory = client.NewHTTPClient
     }
-    return acl.HTTPRequestExecutor(logger, clientFactory)
+    return acl.HTTPRequestExecutor(logger, true, clientFactory)
   }
 
   requestExecutorFactory = httprequestexecutor.HTTPRequestExecutor(logger, requestExecutorFactory)
