@@ -45,7 +45,11 @@ func NewEngine(cfg config.ServiceConfig, logger logging.Logger, w io.Writer) *gi
 	}
 
 	engine := gin.New()
-	engine.Use(gin.LoggerWithConfig(gin.LoggerConfig{Formatter: customLogFormatter, Output: w}), gin.Recovery())
+	engine.Use(gin.LoggerWithConfig(gin.LoggerConfig{
+				Formatter: customLogFormatter, // Use logfmt format
+				Output: w,
+				SkipPaths: []string{"/__health"}, // Do not log health checks
+		}), gin.Recovery())
 
 	engine.RedirectTrailingSlash = true
 	engine.RedirectFixedPath = true
