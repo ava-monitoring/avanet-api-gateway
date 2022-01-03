@@ -1,6 +1,7 @@
 package krakend
 
 import (
+	"fmt"
 	"io"
 	"time"
 
@@ -21,9 +22,12 @@ var customLogFormatter = func(param gin.LogFormatterParams) string {
 	clientIp := param.ClientIP
 	// Extract origin IP set by AWS Load Balancer
 	// https://docs.aws.amazon.com/elasticloadbalancing/latest/application/x-forwarded-headers.html#x-forwarded-for
-	forwardedFor := param.Request.Header.Get("X-Forwarded-For")
-	if forwardedFor != "" {
-		clientIp = forwardedFor
+	// lura overwrites X-Forwarded-For, but nginx ingress set's both, so we can avoid patching lura
+	realIp := param.Request.Header.Get("X-Real-IP")
+	// Without this line, there either is no logging, or flushing is postponed TODO A2-1520 work towards removal
+	fmt.Println("X-Real-IP: " + realIp + " clientIp: " + clientIp)
+	if realIp != "" {
+		clientIp = realIp
 	}
 	output, err := logfmt.MarshalKeyvals("time", param.TimeStamp.Format("2006/01/02 - 15:04:05"),
 		"status", param.StatusCode,
