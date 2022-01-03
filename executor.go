@@ -14,13 +14,13 @@ import (
 	cors "github.com/devopsfaith/krakend-cors/gin"
 	gelf "github.com/devopsfaith/krakend-gelf"
 	gologging "github.com/devopsfaith/krakend-gologging"
-	influxdb "github.com/devopsfaith/krakend-influx"
+	// influxdb "github.com/devopsfaith/krakend-influx"
 	jose "github.com/devopsfaith/krakend-jose"
 	logstash "github.com/devopsfaith/krakend-logstash"
 	metrics "github.com/devopsfaith/krakend-metrics/gin"
 	opencensus "github.com/devopsfaith/krakend-opencensus"
 	_ "github.com/devopsfaith/krakend-opencensus/exporter/datadog"
-	_ "github.com/devopsfaith/krakend-opencensus/exporter/influxdb"
+	// _ "github.com/devopsfaith/krakend-opencensus/exporter/influxdb"
 	_ "github.com/devopsfaith/krakend-opencensus/exporter/jaeger"
 	_ "github.com/devopsfaith/krakend-opencensus/exporter/ocagent"
 	_ "github.com/devopsfaith/krakend-opencensus/exporter/prometheus"
@@ -283,9 +283,11 @@ type MetricsAndTraces struct{}
 func (MetricsAndTraces) Register(ctx context.Context, cfg config.ServiceConfig, l logging.Logger) *metrics.Metrics {
 	metricCollector := metrics.New(ctx, cfg.ExtraConfig, l)
 
+	/*
 	if err := influxdb.New(ctx, cfg.ExtraConfig, metricCollector, l); err != nil {
 		l.Warning(err.Error())
 	}
+	*/
 
 	if err := opencensus.Register(ctx, cfg, append(opencensus.DefaultViews, pubsub.OpenCensusViews...)...); err != nil {
 		l.Warning("opencensus:", err.Error())

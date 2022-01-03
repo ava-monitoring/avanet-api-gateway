@@ -576,8 +576,6 @@ github.com/devopsfaith/krakend-httpsecure v0.0.0-20191009151918-298638962e76 h1:
 github.com/devopsfaith/krakend-httpsecure v0.0.0-20191009151918-298638962e76/go.mod h1:H2qRuYv4A56Kw/cynhiFBP9nFNFhHwj70DEU0CSldbI=
 github.com/devopsfaith/krakend-httpsecure v1.4.0 h1:8VCiJc2U4KGWMF7T7rkn0mAMYRe+3qT2moEuUpHMEaI=
 github.com/devopsfaith/krakend-httpsecure v1.4.0/go.mod h1:7yPOoA9vD8DEbJaI/972kcTBnKVh9kbaVGCR0bqcHdM=
-github.com/devopsfaith/krakend-influx v1.4.0 h1:cRCOV01pp+ZM3nBSQqzHIIFmncqhn+dQr/zFllOPj4M=
-github.com/devopsfaith/krakend-influx v1.4.0/go.mod h1:EHq/ZXawgM/Cc7usySi6aVvGbxNdV/dx+kxk0TAje1Q=
 github.com/devopsfaith/krakend-jose v1.1.1-0.20200611151403-16b353bcefdc h1:NtvPyyXVTUifphWNDllh4TOFI7UnxdNcGNxwBrSrSyg=
 github.com/devopsfaith/krakend-jose v1.1.1-0.20200611151403-16b353bcefdc/go.mod h1:cwnPCZWJe6aVSKPZDKfRX6gUvou0u6N86wLfkU7mBzU=
 github.com/devopsfaith/krakend-jose v1.1.1-0.20200703171549-fd4096987628 h1:qtfldq4vaNw/+6JB9xXEGgss6yqXDdbBtK/xNxlNIKc=
@@ -1347,8 +1345,6 @@ github.com/influxdata/influxdb v1.7.4/go.mod h1:qZna6X/4elxqT3yI9iZYdZrWWdeFOOpr
 github.com/influxdata/influxdb1-client v0.0.0-20191209144304-8bf82d3c094d/go.mod h1:qj24IKcXYK6Iy9ceXlo3Tc+vtHo9lIhSX5JddghvEPo=
 github.com/influxdata/influxql v0.0.0-20180925231337-1cbfca8e56b6/go.mod h1:KpVI7okXjK6PRi3Z5B+mtKZli+R1DnZgb3N+tzevNgo=
 github.com/influxdata/line-protocol v0.0.0-20180522152040-32c6aa80de5e/go.mod h1:4kt73NQhadE3daL3WhR5EJ/J2ocX0PZzwxQ0gXJ7oFE=
-github.com/influxdata/platform v0.0.0-20190117200541-d500d3cf5589 h1:oN2MMxbnMD/XIlyXbSczQqN5vcrCMFuRsiQafSt2c1E=
-github.com/influxdata/platform v0.0.0-20190117200541-d500d3cf5589/go.mod h1:YVhys+JOY4wmXtJvdtkzLhS2K/r/px/vPc+EAddK+pg=
 github.com/influxdata/tdigest v0.0.0-20181121200506-bf2b5ad3c0a9/go.mod h1:Js0mqiSBE6Ffsg94weZZ2c+v/ciT8QRHFOap7EKDrR0=
 github.com/influxdata/usage-client v0.0.0-20160829180054-6d3895376368/go.mod h1:Wbbw6tYNvwa5dlB6304Sd+82Z3f7PmVZHVKU637d4po=
 github.com/jackc/fake v0.0.0-20150926172116-812a484cc733/go.mod h1:WrMFNQdiFJ80sQsxDoMokWK1W5TQtxBFNpzWTD84ibQ=
