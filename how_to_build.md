@@ -33,3 +33,15 @@ Thereafter, do
 ```
 docker build . -t 059741451001.dkr.ecr.eu-north-1.amazonaws.com/krakend:my_tag
 ```
+
+## Pushing the image
+
+Authenticate against AWS ECR
+```
+aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 059741451001.dkr.ecr.eu-north-1.amazonaws.com
+```
+
+Push the image
+```
+docker push 059741451001.dkr.ecr.eu-north-1.amazonaws.com/krakend:my_tag
+```
