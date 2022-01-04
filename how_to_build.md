@@ -12,10 +12,7 @@ into the same parent directory as this repo.
 ## Build
 
 ```
-docker run --rm -it -v //c/path/to/avanet-api-gateway:/go/github.com/avamonitoring/avanet-api-gateway -v //c/path/to/avanet-gateway-access-logging:/go/github.com/avamonitoring/avanet-gateway-access-logging -v //c/path/to/avanet-gateway-access-control:/go/github.com/avamonitoring/avanet-gateway-access-control -v //c/path/to/lura:/go/github.com/avamonitoring/lura golang:1.12
-
-# Needed for old 1.12 image
-apt update && apt install ca-certificates libgnutls30 -y
+docker run --rm -it -v //c/path/to/avanet-api-gateway:/go/github.com/avamonitoring/avanet-api-gateway -v //c/path/to/avanet-gateway-access-logging:/go/github.com/avamonitoring/avanet-gateway-access-logging -v //c/path/to/avanet-gateway-access-control:/go/github.com/avamonitoring/avanet-gateway-access-control -v //c/path/to/lura:/go/github.com/avamonitoring/lura golang:1.13
 
 cd /go/github.com/avamonitoring/avanet-api-gateway
 make build
