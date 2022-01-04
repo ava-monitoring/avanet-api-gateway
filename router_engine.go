@@ -20,6 +20,7 @@ var customLogFormatter = func(param gin.LogFormatterParams) string {
 	}
 	clientIp := param.ClientIP
 	// Extract origin IP set by AWS Load Balancer
+	// https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/x-forwarded-headers.html
 	// https://docs.aws.amazon.com/elasticloadbalancing/latest/application/x-forwarded-headers.html#x-forwarded-for
 	// lura overwrites X-Forwarded-For, but nginx ingress set's both, so we can avoid patching lura
 	realIp := param.Request.Header.Get("X-Real-IP")
