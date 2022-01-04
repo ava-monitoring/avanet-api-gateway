@@ -1,7 +1,6 @@
 package krakend
 
 import (
-	"fmt"
 	"io"
 	"time"
 
@@ -24,8 +23,6 @@ var customLogFormatter = func(param gin.LogFormatterParams) string {
 	// https://docs.aws.amazon.com/elasticloadbalancing/latest/application/x-forwarded-headers.html#x-forwarded-for
 	// lura overwrites X-Forwarded-For, but nginx ingress set's both, so we can avoid patching lura
 	realIp := param.Request.Header.Get("X-Real-IP")
-	// Without this line, there either is no logging, or flushing is postponed TODO A2-1520 work towards removal
-	fmt.Println("X-Real-IP: " + realIp + " clientIp: " + clientIp)
 	if realIp != "" {
 		clientIp = realIp
 	}
@@ -39,7 +36,7 @@ var customLogFormatter = func(param gin.LogFormatterParams) string {
 	if err != nil {
 		return "Error formatting log: " + err.Error()
 	}
-	return string(output)
+	return string(output) + "\n"
 }
 
 // NewEngine creates a new gin engine with some default values and a secure middleware
