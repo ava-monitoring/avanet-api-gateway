@@ -19,13 +19,15 @@ var customLogFormatter = func(param gin.LogFormatterParams) string {
 		param.Latency = param.Latency.Truncate(time.Second)
 	}
 	clientIp := param.ClientIP
-	// Extract origin IP set by AWS Load Balancer
-	// https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/x-forwarded-headers.html
-	// https://docs.aws.amazon.com/elasticloadbalancing/latest/application/x-forwarded-headers.html#x-forwarded-for
-	// lura overwrites X-Forwarded-For, but nginx ingress set's both, so we can avoid patching lura
+	// Extract origin IP set by Nginx Ingress using the PROXY protocol (or by AWS LB at Layer 7)
+	// https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/
+	// https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html
 	realIp := param.Request.Header.Get("X-Real-IP")
+	forwardedFor := param.Request.Header.Get("X-Forwarded-For")
 	if realIp != "" {
 		clientIp = realIp
+	} else if forwardedFor != "" {
+		clientIp = forwardedFor
 	}
 	output, err := logfmt.MarshalKeyvals("time", param.TimeStamp.Format("2006/01/02 - 15:04:05"),
 		"status", param.StatusCode,
