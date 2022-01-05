@@ -27,7 +27,7 @@ require (
 	github.com/devopsfaith/krakend-gologging v1.4.0
 	github.com/devopsfaith/krakend-httpcache v1.4.0
 	github.com/devopsfaith/krakend-httpsecure v1.4.0
-	github.com/devopsfaith/krakend-influx v1.4.0
+	// github.com/devopsfaith/krakend-influx v1.4.0
 	github.com/devopsfaith/krakend-jose v1.4.0
 	github.com/devopsfaith/krakend-jsonschema v1.4.0
 	github.com/devopsfaith/krakend-lambda v1.4.0
@@ -79,8 +79,8 @@ require (
 
 replace github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79 => github.com/m4ns0ur/httpcache v0.0.0-20200426190423-1040e2e8823f
 
-replace github.com/luraproject/lura => /home/landerss/Documents/GitHub/lura
+replace github.com/luraproject/lura => ../lura
 
-replace github.com/avamonitoring/avanet-gateway-access-control => /home/landerss/Documents/GitHub/avanet-gateway-access-control
+replace github.com/avamonitoring/avanet-gateway-access-control => ../avanet-gateway-access-control
 
-replace github.com/avamonitoring/avanet-gateway-access-logging => /home/landerss/Documents/GitHub/avanet-gateway-access-logging
+replace github.com/avamonitoring/avanet-gateway-access-logging => ../avanet-gateway-access-logging
