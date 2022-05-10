@@ -58,7 +58,7 @@ type Input struct {
 	URL    string            `json:"url"`
 	Method string            `json:"method"`
 	Header map[string]string `json:"header"`
-	Body   string            `json:"body"`
+	Body   interface{}       `json:"body"`
 }
 
 // Output contains the data required to verify the response received in a given TestCase
@@ -196,9 +196,7 @@ func NewIntegration(cfg *Config, cb CmdBuilder, bb BackendBuilder) (*Runner, []T
 		}
 	}()
 
-	select {
-	case <-time.After(1500 * time.Millisecond):
-	}
+	<-time.After(1500 * time.Millisecond)
 
 	return &Runner{
 		closeFuncs: closeFuncs,
@@ -335,9 +333,18 @@ func parseTestCase(name string, in []byte) (TestCase, error) {
 
 func newRequest(in Input) (*http.Request, error) {
 	var body io.Reader
-	if in.Body != "" {
-		body = bytes.NewBufferString(in.Body)
+
+	if in.Body != nil {
+		var b []byte
+		switch in.Body.(type) {
+		case string:
+			b = []byte(in.Body.(string))
+		default:
+			b, _ = json.Marshal(in.Body)
+		}
+		body = bytes.NewBuffer(b)
 	}
+
 	req, err := http.NewRequest(in.Method, in.URL, body)
 	if err != nil {
 		return nil, err
@@ -496,7 +503,7 @@ func redirectEndpoint(rw http.ResponseWriter, r *http.Request) {
 	http.Redirect(rw, r, u.String(), code)
 }
 
-func symmetricJWKEndpoint(rw http.ResponseWriter, req *http.Request) {
+func symmetricJWKEndpoint(rw http.ResponseWriter, _ *http.Request) {
 	rw.Header().Add("Content-Type", "application/json")
 	rw.Write([]byte(`{
   "keys": [

@@ -1,16 +1,17 @@
 package krakend
 
 import (
-	"io"
 	"time"
-
-	botdetector "github.com/devopsfaith/krakend-botdetector/gin"
-	httpsecure "github.com/devopsfaith/krakend-httpsecure/gin"
-	lua "github.com/devopsfaith/krakend-lua/router/gin"
 	"github.com/gin-gonic/gin"
-	"github.com/go-logfmt/logfmt"
-	"github.com/luraproject/lura/config"
-	"github.com/luraproject/lura/logging"
+
+	botdetector "github.com/devopsfaith/krakend-botdetector/v2/gin"
+	httpsecure "github.com/devopsfaith/krakend-httpsecure/v2/gin"
+	lua "github.com/devopsfaith/krakend-lua/v2/router/gin"
+	opencensus "github.com/devopsfaith/krakend-opencensus/v2/router/gin"
+	"github.com/luraproject/lura/v2/config"
+	"github.com/luraproject/lura/v2/core"
+	luragin "github.com/luraproject/lura/v2/router/gin"
+	"github.com/luraproject/lura/v2/transport/http/server"
 )
 
 // See https://github.com/gin-gonic/gin/blob/d062a6a6155236883f4c3292379ab94b1eac8b05/logger.go#L143 for original log format
@@ -43,11 +44,11 @@ var customLogFormatter = func(param gin.LogFormatterParams) string {
 }
 
 // NewEngine creates a new gin engine with some default values and a secure middleware
-func NewEngine(cfg config.ServiceConfig, logger logging.Logger, w io.Writer) *gin.Engine {
+func NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine {
 	if !cfg.Debug {
 		gin.SetMode(gin.ReleaseMode)
 	}
-
+	
 	engine := gin.New()
 	engine.Use(gin.LoggerWithConfig(gin.LoggerConfig{
 				Formatter: customLogFormatter, // Use logfmt format
@@ -55,23 +56,30 @@ func NewEngine(cfg config.ServiceConfig, logger logging.Logger, w io.Writer) *gi
 				SkipPaths: []string{"/__health"}, // Do not log health checks
 		}), gin.Recovery())
 
-	engine.RedirectTrailingSlash = true
-	engine.RedirectFixedPath = true
-	engine.HandleMethodNotAllowed = true
+	engine.NoRoute(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoRoute"}, defaultHandler, nil))
+	engine.NoMethod(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoMethod"}, defaultHandler, nil))
 
-	if err := httpsecure.Register(cfg.ExtraConfig, engine); err != nil {
-		logger.Warning(err)
+	logPrefix := "[SERVICE: Gin]"
+	if err := httpsecure.Register(cfg.ExtraConfig, engine); err != nil && err != httpsecure.ErrNoConfig {
+		opt.Logger.Warning(logPrefix+"[HTTPsecure]", err)
+	} else if err == nil {
+		opt.Logger.Debug(logPrefix + "[HTTPsecure] Successfuly loaded module")
 	}
 
-	lua.Register(logger, cfg.ExtraConfig, engine)
+	lua.Register(opt.Logger, cfg.ExtraConfig, engine)
 
-	botdetector.Register(cfg, logger, engine)
+	botdetector.Register(cfg, opt.Logger, engine)
 
 	return engine
 }
 
+func defaultHandler(c *gin.Context) {
+	c.Header(core.KrakendHeaderName, core.KrakendHeaderValue)
+	c.Header(server.CompleteResponseHeaderName, server.HeaderIncompleteResponseValue)
+}
+
 type engineFactory struct{}
 
-func (e engineFactory) NewEngine(cfg config.ServiceConfig, l logging.Logger, w io.Writer) *gin.Engine {
-	return NewEngine(cfg, l, w)
+func (engineFactory) NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine {
+	return NewEngine(cfg, opt)
 }
