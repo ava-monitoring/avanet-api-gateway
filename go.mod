@@ -35,6 +35,7 @@ require (
 	github.com/devopsfaith/krakend-xml/v2 v2.0.0
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-contrib/uuid v1.2.0
+	github.com/go-logfmt/logfmt v0.5.0
 	github.com/luraproject/lura/v2 v2.0.4
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 )
@@ -85,7 +86,9 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/devigned/tab v0.1.1 // indirect
 	github.com/devopsfaith/flatmap v1.1.0 // indirect
+	github.com/devopsfaith/krakend-opencensus v1.4.1 // indirect
 	github.com/devopsfaith/krakend-ratelimit v1.4.0 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/dimchansky/utfbom v1.1.1 // indirect
 	github.com/dlclark/regexp2 v1.1.6 // indirect
 	github.com/eapache/go-resiliency v1.2.0 // indirect
@@ -118,7 +121,7 @@ require (
 	github.com/hashicorp/go-rootcerts v1.0.2 // indirect
 	github.com/hashicorp/go-sockaddr v1.0.2 // indirect
 	github.com/hashicorp/go-uuid v1.0.2 // indirect
-	github.com/hashicorp/golang-lru v0.5.3 // indirect
+	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/vault/api v1.0.5-0.20201001211907-38d91b749c77 // indirect
 	github.com/hashicorp/vault/sdk v0.1.14-0.20201109203410-5e6e24692b32 // indirect
@@ -133,6 +136,9 @@ require (
 	github.com/klauspost/compress v1.13.1 // indirect
 	github.com/kpacha/opencensus-influxdb v0.0.0-20181102202715-663e2683a27c // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
+	github.com/lestrrat/go-jwx v0.0.0-20180221005942-b7d4802280ae // indirect
+	github.com/lestrrat/go-pdebug v0.0.0-20180220043741-569c97477ae8 // indirect
+	github.com/luraproject/lura v1.4.1 // indirect
 	github.com/magiconair/properties v1.8.1 // indirect
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
@@ -151,6 +157,7 @@ require (
 	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 // indirect
 	github.com/openzipkin/zipkin-go v0.2.2 // indirect
+	github.com/ory/keto/proto/ory/keto/acl/v1alpha1 v0.0.0-20210616104402-80e043246cf9 // indirect
 	github.com/pelletier/go-toml v1.7.0 // indirect
 	github.com/philhofer/fwd v1.0.0 // indirect
 	github.com/pierrec/lz4 v2.6.0+incompatible // indirect
@@ -220,7 +227,7 @@ require (
 
 replace github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79 => github.com/m4ns0ur/httpcache v0.0.0-20200426190423-1040e2e8823f
 
-replace github.com/luraproject/lura => ../lura
+replace github.com/luraproject/lura/v2 => ../lura
 
 replace github.com/avamonitoring/avanet-gateway-access-control => ../avanet-gateway-access-control
 

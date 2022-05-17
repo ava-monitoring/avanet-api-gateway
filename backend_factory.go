@@ -2,13 +2,8 @@ package krakend
 
 import (
 	"context"
-	"fmt"
 
-	amqp "github.com/devopsfaith/krakend-amqp/v2"
-	cel "github.com/devopsfaith/krakend-cel/v2"
 	cb "github.com/devopsfaith/krakend-circuitbreaker/v2/gobreaker/proxy"
-	httpcache "github.com/devopsfaith/krakend-httpcache/v2"
-	lambda "github.com/devopsfaith/krakend-lambda/v2"
 	lua "github.com/devopsfaith/krakend-lua/v2/proxy"
 	martian "github.com/devopsfaith/krakend-martian/v2"
 	metrics "github.com/devopsfaith/krakend-metrics/v2/gin"
@@ -48,8 +43,9 @@ func NewBackendFactoryWithContext(ctx context.Context, logger logging.Logger, me
   	bf := pubsub.NewBackendFactory(ctx, logger, backendFactory)
   	backendFactory = bf.New
   	backendFactory = lua.BackendFactory(logger, backendFactory)
-  	backendFactory = juju.BackendFactory(backendFactory)
+  	backendFactory = juju.BackendFactory(logger, backendFactory)
   	backendFactory = cb.BackendFactory(backendFactory, logger)
+  	backendFactory = metricCollector.BackendFactory("backend", backendFactory)
   	backendFactory = opencensus.BackendFactory(backendFactory)
   	backendFactory = acp.BackendFactory(logger, backendFactory)
   	backendFactory = acl.BackendFactory(logger, backendFactory)

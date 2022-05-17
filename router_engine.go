@@ -8,6 +8,7 @@ import (
 	httpsecure "github.com/devopsfaith/krakend-httpsecure/v2/gin"
 	lua "github.com/devopsfaith/krakend-lua/v2/router/gin"
 	opencensus "github.com/devopsfaith/krakend-opencensus/v2/router/gin"
+	"github.com/go-logfmt/logfmt"
 	"github.com/luraproject/lura/v2/config"
 	"github.com/luraproject/lura/v2/core"
 	luragin "github.com/luraproject/lura/v2/router/gin"
@@ -52,7 +53,7 @@ func NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine 
 	engine := gin.New()
 	engine.Use(gin.LoggerWithConfig(gin.LoggerConfig{
 				Formatter: customLogFormatter, // Use logfmt format
-				Output: w,
+				Output: opt.Writer,
 				SkipPaths: []string{"/__health"}, // Do not log health checks
 		}), gin.Recovery())
 

@@ -18,7 +18,6 @@ import (
 	cors "github.com/devopsfaith/krakend-cors/v2/gin"
 	gelf "github.com/devopsfaith/krakend-gelf/v2"
 	gologging "github.com/devopsfaith/krakend-gologging/v2"
-	influxdb "github.com/devopsfaith/krakend-influx/v2"
 	jose "github.com/devopsfaith/krakend-jose/v2"
 	logstash "github.com/devopsfaith/krakend-logstash/v2"
 	metrics "github.com/devopsfaith/krakend-metrics/v2/gin"
