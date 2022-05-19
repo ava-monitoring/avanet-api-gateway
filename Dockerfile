@@ -1,27 +1,17 @@
-ARG GOLANG_VERSION
-ARG ALPINE_VERSION
-FROM golang:${GOLANG_VERSION}-alpine${ALPINE_VERSION} as builder
+FROM debian:buster-slim
 
-RUN apk --no-cache add make gcc musl-dev binutils-gold
+RUN apt-get update && \
+	apt-get install -y ca-certificates && \
+	update-ca-certificates && \
+	rm -rf /var/lib/apt/lists/*
 
-COPY . /app
-WORKDIR /app
+ADD krakend /usr/bin/krakend
 
-RUN make build
+RUN useradd -r -c "KrakenD user" -U krakend
 
+USER krakend
 
-FROM alpine:${ALPINE_VERSION}
-
-LABEL maintainer="community@krakend.io"
-
-RUN apk add --no-cache ca-certificates && \
-    adduser -u 1000 -S -D -H krakend && \
-    mkdir /etc/krakend && \
-    echo '{ "version": 3 }' > /etc/krakend/krakend.json
-
-COPY --from=builder /app/krakend /usr/bin/krakend
-
-USER 1000
+VOLUME [ "/etc/krakend" ]
 
 WORKDIR /etc/krakend
 

@@ -3,7 +3,7 @@ module github.com/devopsfaith/krakend-ce/v2
 go 1.17
 
 require (
-	github.com/avamonitoring/avanet-gateway-access-control v0.1.0-alpha.1
+	github.com/avamonitoring/avanet-gateway-access-control v1.4.1-ory-keto.0.7
 	github.com/avamonitoring/avanet-gateway-access-logging v0.0.0-20201018160748-7257a66ff0ae
 	github.com/devopsfaith/bloomfilter/v2 v2.0.0
 	github.com/devopsfaith/krakend-amqp/v2 v2.0.1
@@ -84,6 +84,7 @@ require (
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/danwakefield/fnmatch v0.0.0-20160403171240-cbb64ac3d964 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1 // indirect
 	github.com/devigned/tab v0.1.1 // indirect
 	github.com/devopsfaith/flatmap v1.1.0 // indirect
 	github.com/devopsfaith/krakend-opencensus v1.4.1 // indirect
@@ -102,6 +103,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
 	github.com/go-test/deep v1.0.7 // indirect
+	github.com/goccy/go-json v0.9.7 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.3 // indirect
@@ -136,6 +138,12 @@ require (
 	github.com/klauspost/compress v1.13.1 // indirect
 	github.com/kpacha/opencensus-influxdb v0.0.0-20181102202715-663e2683a27c // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
+	github.com/lestrrat-go/blackmagic v1.0.1 // indirect
+	github.com/lestrrat-go/httpcc v1.0.1 // indirect
+	github.com/lestrrat-go/httprc v1.0.1 // indirect
+	github.com/lestrrat-go/iter v1.0.2 // indirect
+	github.com/lestrrat-go/jwx/v2 v2.0.1 // indirect
+	github.com/lestrrat-go/option v1.0.0 // indirect
 	github.com/lestrrat/go-jwx v0.0.0-20180221005942-b7d4802280ae // indirect
 	github.com/lestrrat/go-pdebug v0.0.0-20180220043741-569c97477ae8 // indirect
 	github.com/luraproject/lura v1.4.1 // indirect
@@ -201,7 +209,7 @@ require (
 	gocloud.dev/pubsub/natspubsub v0.21.0 // indirect
 	gocloud.dev/pubsub/rabbitpubsub v0.21.0 // indirect
 	gocloud.dev/secrets/hashivault v0.21.0 // indirect
-	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
+	golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f // indirect
 	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd // indirect
 	golang.org/x/oauth2 v0.0.0-20220223155221-ee480838109b // indirect
 	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e // indirect

@@ -54,7 +54,7 @@ func NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine 
 	engine.Use(gin.LoggerWithConfig(gin.LoggerConfig{
 				Formatter: customLogFormatter, // Use logfmt format
 				Output: opt.Writer,
-				SkipPaths: []string{"/__health"}, // Do not log health checks
+				SkipPaths: []string{"/__health","/health"}, // Do not log health checks
 		}), gin.Recovery())
 
 	engine.NoRoute(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoRoute"}, defaultHandler, nil))
