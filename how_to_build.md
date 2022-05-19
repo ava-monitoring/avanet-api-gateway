@@ -30,6 +30,10 @@ Thereafter, do
 ```
 docker build . -t 059741451001.dkr.ecr.eu-north-1.amazonaws.com/krakend:my_tag
 ```
+You can also do
+```
+sudo make docker
+```
 
 ## Pushing the image
 
