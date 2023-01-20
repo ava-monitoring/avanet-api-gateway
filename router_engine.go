@@ -2,7 +2,6 @@ package krakend
 
 import (
 	"time"
-	"github.com/go-logfmt/logfmt"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 
@@ -10,6 +9,7 @@ import (
 	httpsecure "github.com/krakendio/krakend-httpsecure/v2/gin"
 	lua "github.com/krakendio/krakend-lua/v2/router/gin"
 	opencensus "github.com/krakendio/krakend-opencensus/v2/router/gin"
+	"github.com/go-logfmt/logfmt"
 	"github.com/luraproject/lura/v2/config"
 	"github.com/luraproject/lura/v2/core"
 	luragin "github.com/luraproject/lura/v2/router/gin"
@@ -60,6 +60,7 @@ func NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine 
 
 	engine.NoRoute(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoRoute"}, defaultHandler, nil))
 	engine.NoMethod(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoMethod"}, defaultHandler, nil))
+ 	
 	if v, ok := cfg.ExtraConfig[luragin.Namespace]; ok && v != nil {
 		var ginOpts ginOptions
 		if b, err := json.Marshal(v); err == nil {

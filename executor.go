@@ -19,7 +19,6 @@ import (
 	cors "github.com/krakendio/krakend-cors/v2/gin"
 	gelf "github.com/krakendio/krakend-gelf/v2"
 	gologging "github.com/krakendio/krakend-gologging/v2"
-	influxdb "github.com/krakendio/krakend-influx/v2"
 	jose "github.com/krakendio/krakend-jose/v2"
 	logstash "github.com/krakendio/krakend-logstash/v2"
 	metrics "github.com/krakendio/krakend-metrics/v2/gin"
@@ -292,7 +291,6 @@ func (LoggerBuilder) NewLogger(cfg config.ServiceConfig) (logging.Logger, io.Wri
 	} else {
 		gelfWriter = nil
 	}
-
 	logger, gologgingErr := logstash.NewLogger(cfg.ExtraConfig)
 
 	if gologgingErr != nil {
@@ -309,15 +307,12 @@ func (LoggerBuilder) NewLogger(cfg config.ServiceConfig) (logging.Logger, io.Wri
 			}
 		}
 	}
-
 	if gelfErr != nil && gelfErr != gelf.ErrWrongConfig {
 		logger.Error("[SERVICE: Logging][GELF] Unable to create the writer:", gelfErr.Error())
 	}
-
 	if gologgingErr == nil {
 		logger.Debug("[SERVICE: telemetry/logging] Improved logging started.")
 	}
-
 	return logger, gelfWriter, nil
 }
 
@@ -348,16 +343,6 @@ type MetricsAndTraces struct{}
 // Register registers the metrics, influx and opencensus packages as required by the given configuration.
 func (MetricsAndTraces) Register(ctx context.Context, cfg config.ServiceConfig, l logging.Logger) *metrics.Metrics {
 	metricCollector := metrics.New(ctx, cfg.ExtraConfig, l)
-
-	/*
-	if err := influxdb.New(ctx, cfg.ExtraConfig, metricCollector, l); err != nil {
-		if err != influxdb.ErrNoConfig {
-			l.Warning("[SERVICE: InfluxDB]", err.Error())
-		}
-	} else {
-		l.Debug("[SERVICE: InfluxDB] Service correctly registered")
-	}
-	*/
 
 	if err := opencensus.Register(ctx, cfg, append(opencensus.DefaultViews, pubsub.OpenCensusViews...)...); err != nil {
 		if err != opencensus.ErrNoConfig {
